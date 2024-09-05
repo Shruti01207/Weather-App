@@ -1,0 +1,73 @@
+
+    <div class="container">
+        <div class="search-container my-4">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="input-group">
+                        <input class="form-control border-end-0 border rounded-pill" #cityName [(ngModel)]="searchText"
+                            type="search" value="search" (change)="getData(cityName.value)" id="example-search-input">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill"
+                                style="margin-left:-100%; z-index: 100;" type="button">
+                                <i class="fa fa-search" (click)="Search( )" style="color: black;"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isLoading==true">
+            <div class="col-md-6 mx-auto">
+                <div class="spinner-box d-flex justify-content-center align-items-center" id="spinner-container">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-box" *ngIf="isLoading==false">
+            <div class="row">
+                <div class="col-md-5 mx-auto weather-card shadow pt-3 pb-4">
+                    <div class="date text-center text-white">
+                        <h4>{{currentDate|date:'EEEE, MMMM d, y'}}</h4>
+                    </div>
+                    <div class="city text-center text-white fw-bold">
+                        <h2>{{data?.name}}</h2>
+                    </div>
+                    <img [src]="getImageUrl( )" class="center" alt="">
+                    <div class="weather-condition text-center text-white fw-bold">
+                        <h3>{{data?.weather[0]?.main}}</h3>
+                    </div>
+                    <div class="temperature text-white fw-bold text-center">
+                        <h1>{{data?.main?.feels_like}} &#176; C</h1>
+                    </div>
+                    <hr style="background-color: aliceblue;">
+                    <div class="weather-info">
+                        <div class="row p-2 m-0">
+                            <div class="min-temp col-6 p-0 m-0">
+                                <p class="text-white">Min Temp: <span class="fw-bold">{{data?.main?.temp_min}}&#176;
+                                        C</span>
+                                </p>
+                            </div>
+                            <div class="max-temp col-6 p-0 m-0">
+                                <p class="text-white">Max Temp: <span class="fw-bold">{{data?.main?.temp_max}}&#176;
+                                        C</span>
+                                </p>
+                            </div>
+                            <div class="humidity col-6 p-0 m-0">
+                                <p class="text-white">Humidity: <span class="fw-bold">{{data?.main?.humidity}}%</span>
+                                </p>
+                            </div>
+                            <div class="col-6 p-0 m-0">
+                                <p class="text-white">Wind: <span class="fw-bold">{{data?.wind?.speed}} km/hr</span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
